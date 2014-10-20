@@ -14,5 +14,6 @@ public class TestScript : MonoBehaviour {
 		int b;
 		int c;
 		int d;
+		int e;
 	}
 }
