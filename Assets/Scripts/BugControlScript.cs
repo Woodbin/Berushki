@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class ControlScript : MonoBehaviour {
+public class BugControlScript : MonoBehaviour {
 	public double step = 0.5;
 	public double maxSpeed = 1;
 	private float movex=0;

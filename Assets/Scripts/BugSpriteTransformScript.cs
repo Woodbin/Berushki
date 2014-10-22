@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class SpriteTransformScript : MonoBehaviour {
+public class BugSpriteTransformScript : MonoBehaviour {
 
 	public bool facingRight = false;
 	public bool facingUp = false;
