@@ -2,8 +2,8 @@
 using System.Collections;
 
 public class BugControlScript : MonoBehaviour {
-	public double step = 0.5;
-	public double maxSpeed = 1;
+	public float step = 0.5f;
+	public float maxSpeed = 1;
 	private float movex=0;
 	private float movey=0;
 	private Vector3 pos;
@@ -57,3 +57,4 @@ public class BugControlScript : MonoBehaviour {
 
 
 	}
+}
