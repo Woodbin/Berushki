@@ -47,4 +47,13 @@ public class ControlScript : MonoBehaviour {
 		transform.position= Vector3.MoveTowards(transform.position,pos, Time.deltaTime*maxSpeed);
 
 
+
+
 }
+
+	public void setPosition(float x, float y){
+		gameObject.transform.Translate(x,y,0);
+
+
+
+	}
