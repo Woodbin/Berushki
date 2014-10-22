@@ -2,8 +2,8 @@
 using System.Collections;
 
 public class BugControlScript : MonoBehaviour {
-	public float step = 0.5f;
-	public float maxSpeed = 1;
+	public float step = 16;
+	public float maxSpeed = 32;
 	private float movex=0;
 	private float movey=0;
 	private Vector3 pos;
@@ -11,6 +11,8 @@ public class BugControlScript : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+		tr = gameObject.transform;
+		pos = transform.position;
 	
 	}
 	
