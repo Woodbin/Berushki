@@ -3,8 +3,8 @@ using System.Collections;
 
 public class SpriteTransformScript : MonoBehaviour {
 
-	private bool facingRight = false;
-	private bool facingUp = false;
+	public bool facingRight = false;
+	public bool facingUp = false;
 	private float movex=0;
 	private float movey=0;
 
