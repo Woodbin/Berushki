@@ -15,11 +15,12 @@ public class BugSpriteTransformScript : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
+		if(gameObject.GetComponent<Animator>().GetFloat("speed")!=0){
 		if(movex>0) setDirection(3);
 		if(movex<0) setDirection(1);
 		if(movey>0) setDirection(0);
 		if(movey<0) setDirection(2);
-
+		}
 
 	}
 
