@@ -26,27 +26,38 @@ public class BugControlScript : MonoBehaviour {
 		else 		movex= Mathf.Floor(Input.GetAxis("Horizontal"));
 		if(Input.GetAxis("Vertical")>0) movey= Mathf.Ceil(Input.GetAxis("Vertical"));
 		else 		movey= Mathf.Floor(Input.GetAxis("Vertical"));
-		
+		gameObject.GetComponent<Animator>().SetFloat("speed",0);
+
 		
 		
 		if(tr.position==pos){
+			gameObject.GetComponent<Animator>().SetFloat("speed",movex+movey);
+
 			//pos=tr.position;
 			if(movex>0&&movey==0){
+				if(!Physics.Raycast(pos,Vector3.right*step,16))
 				pos+=Vector3.right*step;
 				
 			}else if(movex<0&&movey==0){
-				pos+=Vector3.left*step;
+				if(!Physics.Raycast(pos,Vector3.left*step,16))
+
+					pos+=Vector3.left*step;
 				
 			}else if(movey>0&&movex==0){
-				pos+=Vector3.up*step;
+				if(!Physics.Raycast(pos,Vector3.up*step,16))
+
+					pos+=Vector3.up*step;
 				
 			}else if(movey<0&&movex==0){
-				pos+=Vector3.down*step;
+				if(!Physics.Raycast(pos,Vector3.right*step,16))
+
+					pos+=Vector3.down*step;
 				
 			}
 			
 		}
 		transform.position= Vector3.MoveTowards(transform.position,pos, Time.deltaTime*maxSpeed);
+		gameObject.GetComponent<Animator>().SetFloat("speed",movex+movey);
 
 
 
