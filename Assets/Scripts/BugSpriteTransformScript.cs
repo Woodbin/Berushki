@@ -3,8 +3,8 @@ using System.Collections;
 
 public class BugSpriteTransformScript : MonoBehaviour {
 
-	public bool facingRight = false;
-	public bool facingUp = false;
+	public bool facingRight = true;
+	public bool facingUp = true;
 	private float movex=0;
 	private float movey=0;
 
@@ -16,10 +16,17 @@ public class BugSpriteTransformScript : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if(movex>0&&!facingRight) flipX();
+		/*if(movex>0&&!facingRight) flipX();
 		else if(movex<0&&facingRight) flipX();
 		if(movey>0&&!facingUp) flipY();
-		else if(movey<0&&facingUp) flipY();
+		else if(movey<0&&facingUp) flipY();*/
+
+		if(movex>0) setDirection(3);
+		if(movex<0) setDirection(1);
+		if(movey>0) setDirection(0);
+		if(movey<0) setDirection(2);
+
+
 	}
 
 	void FixedUpdate(){
@@ -33,11 +40,13 @@ public class BugSpriteTransformScript : MonoBehaviour {
 
 	void flipX(){
 		facingRight = !facingRight;
-		int rot = 90;
-		if(facingRight) rot*=-1;
-		transform.rotation.Set(rot,transform.rotation.y,transform.rotation.z,transform.rotation.w);
+		float rot = 90;
+		if(facingRight) rot*=-1f;
+		transform.localEulerAngles = new Vector3(0,0,rot);
 		
 	}
+
+
 
 	void flipY(){
 		facingUp = !facingUp;
@@ -46,6 +55,14 @@ public class BugSpriteTransformScript : MonoBehaviour {
 		transform.localScale=scale;
 	}
 
+	void setDirection(int dir){
 
-
+		switch(dir){
+		case 0: transform.localEulerAngles = new Vector3(0,0,0); break;
+		case 1:	transform.localEulerAngles = new Vector3(0,0,90); break;
+		case 2: transform.localEulerAngles = new Vector3(0,0,180); break;
+		case 3: transform.localEulerAngles = new Vector3(0,0,270); break;
+		default: transform.localEulerAngles = new Vector3(0,0,0); break;
+		}
+	}
 }
