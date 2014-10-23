@@ -33,9 +33,10 @@ public class BugSpriteTransformScript : MonoBehaviour {
 
 	void flipX(){
 		facingRight = !facingRight;
-		Vector3 scale = transform.localScale;
-		scale.x *=-1;
-		transform.localScale=scale;
+		int rot = 90;
+		if(facingRight) rot*=-1;
+		transform.rotation.Set(rot)
+		
 	}
 
 	void flipY(){
