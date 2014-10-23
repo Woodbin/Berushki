@@ -35,7 +35,7 @@ public class BugSpriteTransformScript : MonoBehaviour {
 		facingRight = !facingRight;
 		int rot = 90;
 		if(facingRight) rot*=-1;
-		transform.rotation.Set(rot)
+		transform.rotation.Set(rot);
 		
 	}
 
