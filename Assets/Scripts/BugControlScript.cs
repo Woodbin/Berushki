@@ -29,27 +29,27 @@ public class BugControlScript : MonoBehaviour {
 		gameObject.GetComponent<Animator>().SetFloat("speed",0);
 
 		
-		
-		if(tr.position==pos){
-			gameObject.GetComponent<Animator>().SetFloat("speed",movex+movey);
+		bool ray = true;
+		if(movex>0&&movey==0) ray = Physics.Raycast(pos,Vector3.right,4);
+		if(movex<0&&movey==0) ray = Physics.Raycast(pos,Vector3.left,4);
+		if(movey>0&&movex==0) ray = Physics.Raycast(pos,Vector3.up,4);
+		if(movey<0&&movex==0) ray = Physics.Raycast(pos,Vector3.down,4);
+
+		if((tr.position==pos)&&!ray){
+			gameObject.GetComponent<Animator>().SetFloat("speed",Mathf.Abs(0));
 
 			//pos=tr.position;
 			if(movex>0&&movey==0){
-				if(!Physics.Raycast(pos,Vector3.right*step,16))
 				pos+=Vector3.right*step;
 				
 			}else if(movex<0&&movey==0){
-				if(!Physics.Raycast(pos,Vector3.left*step,16))
-
 					pos+=Vector3.left*step;
 				
 			}else if(movey>0&&movex==0){
-				if(!Physics.Raycast(pos,Vector3.up*step,16))
 
 					pos+=Vector3.up*step;
 				
 			}else if(movey<0&&movex==0){
-				if(!Physics.Raycast(pos,Vector3.right*step,16))
 
 					pos+=Vector3.down*step;
 				
@@ -57,7 +57,7 @@ public class BugControlScript : MonoBehaviour {
 			
 		}
 		transform.position= Vector3.MoveTowards(transform.position,pos, Time.deltaTime*maxSpeed);
-		gameObject.GetComponent<Animator>().SetFloat("speed",movex+movey);
+		gameObject.GetComponent<Animator>().SetFloat("speed",Mathf.Abs(movex+movey));
 
 
 
