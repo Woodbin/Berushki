@@ -1,36 +1,48 @@
 ﻿using UnityEngine;
 using System.Collections;
-using System.
 
 
 public class Level_Control : MonoBehaviour {
-	public bool prediction(x,y,smer){
+	/*public bool prediction(int x,int y,int smer){
 	}
 	public int blockAt(int x,int y){
 	}
-	public void setBlockAt(x,y,id){
+	public void setBlockAt(int x,int y,int id){
 	}
+*/
 
 
-
-	int[] Parser(string text){
-		int length = text.Length;
-		int[] array; 
-		for (int i=0; i<length; i++) {
+	int[] parser(string vstup){
+		int length = vstup.Length / 2;
+		int[] array = new int[length];
+		string[] text;
+		text = vstup.Split(',');
+		for (int i=0; i<text.Length; i++) {
 			array[i] = int.Parse(text[i]);
+				}
+		return array;
+		}
+	void vypis(int[][] pole, int delka){
 
-
+				for (int i=0; i<delka; i++) {
+						for (int j=0; j<pole.Length; j++) {
+				System.Console.Write(pole);
+						}
 				}
 		}
-
 
 	// Use this for initialization
 	void Start () {
 		string line;
 		System.IO.StreamReader file = new System.IO.StreamReader(@"mapa_pro_pohyb.txt");
+		int[,] herniPole = new int[40,40];
+		int[] tempArray = new int[40];
+		int j = 0;
 		while((line = file.ReadLine()) != null)
 		{
-			Parser(line);
+			tempArray = parser(line);
+			for(int i=0;i<40;i++) herniPole[i,j] = tempArray[i];
+
 		}
 
 
