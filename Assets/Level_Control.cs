@@ -91,19 +91,19 @@ public class Level_Control : MonoBehaviour {
 		switch(smer){
 		case 0:
 			//pravá
-			if(herniPole[coords[1]+1, coords[0]]==cihla) col = true;
+			if(herniPole[coords[0]+1, coords[1]]==cihla) col = true;
 			break;
 		case 1:
 			//levá
-			if(herniPole[coords[1]-1, coords[0]]==cihla) col = true;
+			if(herniPole[coords[0]-1, coords[1]]==cihla) col = true;
 			break;
 		case 2:
 			//dolu
-			if(herniPole[coords[1], coords[0]+1]==cihla) col = true;
+			if(herniPole[coords[0], coords[1]+1]==cihla) col = true;
 			break;
 		case 3:
 			//nahoru
-			if(herniPole[coords[1], coords[0]-1]==cihla) col = true;
+			if(herniPole[coords[0], coords[1]-1]==cihla) col = true;
 
 			break;
 		}
