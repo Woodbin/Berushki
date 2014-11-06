@@ -6,6 +6,7 @@ public class Level_Control : MonoBehaviour {
 	private int roomSizeX = 32;
 	private int roomSizeY = 24;
 	private int[,] herniPole;
+	private const int cihla = 1;
 
 
 	int[] parser(string vstup){
@@ -85,20 +86,46 @@ public class Level_Control : MonoBehaviour {
 	}
 
 	public bool prediction(float x,float y,int smer){
-		//TODO Placeholder
-		return false;
+		bool col = false;
+		int[] coords = floatToCoords(x,y);
+		switch(smer){
+		case 0:
+			//pravá
+			if(herniPole[coords[0]+1, coords[1]]==cihla) col = true;
+			break;
+		case 1:
+			//levá
+			if(herniPole[coords[0]-1, coords[1]]==cihla) col = true;
+			break;
+		case 2:
+			//dolu
+			if(herniPole[coords[0]+1, coords[1]]==cihla) col = true;
+
+			break;
+		case 3:
+			//nahoru
+			if(herniPole[coords[0]-1, coords[1]]==cihla) col = true;
+
+			break;
+		}
+		return col;
 	}
 	public int blockAt(float x,float y){
-		//TODO Placeholder
 
-		return 0;
+		int[] coords = floatToCoords(x,y);
+		return herniPole[coords[1],coords[1]];
+
 	}
 	public void setBlockAt(float x,float y,int id){
-		//TODO Placeholder
-		
+		int[] coords = floatToCoords(x,y);
+		herniPole[coords[0],coords[1]]=id;
 	}
-	public int floatToCoords(float f){
-		//TODO Placeholder
-		return 0;
+	public int[] floatToCoords(float x, float y){
+		int[] coords = new int[2]();
+		coords[0] = (int)Mathf.Floor(x/3.2);
+		coords[1] = (int)Mathf.Floor(y/3.2);
+
+
+		return coords;
 	}
 }
