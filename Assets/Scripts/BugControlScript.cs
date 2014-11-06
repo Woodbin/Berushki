@@ -18,15 +18,18 @@ public class BugControlScript : MonoBehaviour {
 	//public float rayCastLength = 16;
 /*	private float movex=0;
 	private float movey=0;*/
-//	private Vector3 pos;
-	//private Transform tr;
+	private Vector3 pos ;
+	private Transform tr;
 	public bool rayState;
+	private Level_Control lc;
+	private string levelName;
 
 	// Use this for initialization
 	void Start () {
-	/*	tr = gameObject.transform;
-		pos = transform.position;*/
-	
+		levelName = "mapa_pro_pohyb";
+	tr = gameObject.transform;
+		pos = transform.position;
+		lc = GameObject.Find(levelName).GetComponent<Level_Control>();
 	}
 	
 	// Update is called once per frame
@@ -34,10 +37,10 @@ public class BugControlScript : MonoBehaviour {
 		if(!isMoving){
 			input = new Vector2(Input.GetAxis("Horizontal"),Input.GetAxis("Vertical"));
 			bool ray = false;
-			if(input.x>0&&input.y==0) ray = Level_Control.prediction(pos.x,pos.y,0);
-			if(input.x<0&&input.y==0) ray = Level_Control.prediction(pos.x,pos.y,1);
-			if(input.y>0&&input.x==0) ray = Level_Control.prediction(pos.x,pos.y,2);
-			if(input.y<0&&input.x==0) ray = Level_Control.prediction(pos.x,pos.y,3);
+			if(input.x>0&&input.y==0) ray = lc.prediction(pos.x,pos.y,0);
+			if(input.x<0&&input.y==0) ray = lc.prediction(pos.x,pos.y,1);
+			if(input.y>0&&input.x==0) ray = lc.prediction(pos.x,pos.y,2);
+			if(input.y<0&&input.x==0) ray = lc.prediction(pos.x,pos.y,3);
 			rayState = ray;
 			if(!allowDiagonals){
 
