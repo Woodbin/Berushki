@@ -99,11 +99,11 @@ public class Level_Control : MonoBehaviour {
 			break;
 		case 2:
 			//dolu
-			if(herniPole[coords[1]+1, coords[0]]==cihla) col = true;
+			if(herniPole[coords[1], coords[0]+1]==cihla) col = true;
 			break;
 		case 3:
 			//nahoru
-			if(herniPole[coords[1]-1, coords[0]]==cihla) col = true;
+			if(herniPole[coords[1], coords[0]-1]==cihla) col = true;
 
 			break;
 		}
@@ -120,10 +120,18 @@ public class Level_Control : MonoBehaviour {
 		herniPole[coords[0],coords[1]]=id;
 	}
 	public int[] floatToCoords(float x, float y){
-		int[] coords = new int[2]();
-		coords[0] = (int)Mathf.Floor(x/3.2);
-		coords[1] = (int)Mathf.Floor(y/3.2);
+		int[] coords = new int[2];
+		coords[0] = (int)Mathf.Floor(x/25.6f);
+		coords[1] = (int)Mathf.Floor(y/25.6f)+1;
+		if(coords[0]<0) coords[0]=roomSizeX+coords[0]; 
+		if(coords[1]<0) coords[1]=roomSizeY+coords[1];
+		if(coords[0]>0) coords[0]=roomSizeX-coords[0]; 
+		if(coords[1]>0) coords[1]=roomSizeY-coords[1];
+		if(coords[0]==0) coords[0]=roomSizeX/2; 
+		if(coords[1]==0) coords[1]=roomSizeY/2;
 
+		Debug.Log(coords[0]);
+		Debug.Log(coords[1]);
 
 		return coords;
 	}

@@ -36,6 +36,7 @@ public class BugControlScript : MonoBehaviour {
 	void Update () {
 		if(!isMoving){
 			input = new Vector2(Input.GetAxis("Horizontal"),Input.GetAxis("Vertical"));
+			pos = transform.position;
 			bool ray = false;
 			if(input.x>0&&input.y==0) ray = lc.prediction(pos.x,pos.y,0);
 			if(input.x<0&&input.y==0) ray = lc.prediction(pos.x,pos.y,1);
