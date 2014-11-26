@@ -42,11 +42,11 @@ public class Level_Control : MonoBehaviour {
 		}
 
 	void vypis(int[,] pole){
-				for (int i=0; i<roomSizeX; i++) {
+				for (int i=0; i<pole.GetLength(0); i++) {
 			string mes = "";
 
-						for (int j=0; j<roomSizeY; j++) {
-				mes+=pole[j,i];
+						for (int j=0; j<pole.GetLength(1); j++) {
+				mes+=pole[i,j];
 						}
 			Debug.Log(mes);
 				}
