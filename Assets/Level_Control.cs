@@ -121,14 +121,9 @@ public class Level_Control : MonoBehaviour {
 	}
 	public int[] floatToCoords(float x, float y){
 		int[] coords = new int[2];
-		coords[0] = (int)Mathf.Floor(x/25.6f);
-		coords[1] = (int)Mathf.Floor(y/25.6f)+1;
-		if(coords[0]<0) coords[0]=roomSizeX+coords[0]; 
-		if(coords[1]<0) coords[1]=roomSizeY+coords[1];
-		if(coords[0]>0) coords[0]=roomSizeX-coords[0]; 
-		if(coords[1]>0) coords[1]=roomSizeY-coords[1];
-		if(coords[0]==0) coords[0]=roomSizeX/2; 
-		if(coords[1]==0) coords[1]=roomSizeY/2;
+
+        coords[0] = (int)Mathf.Floor(x/25.6f);
+        coords[1] = (int)Mathf.Floor(Mathf.Abs(y / 25.6f));
 
 		Debug.Log(coords[0]);
 		Debug.Log(coords[1]);
