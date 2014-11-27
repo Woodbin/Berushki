@@ -9,7 +9,7 @@ public class BarrelControl : MonoBehaviour {
     private Transform tr;
 
     //grid movement variables
-    private float moveSpeed = 96f;
+    private float moveSpeed = 960f;
     private float gridSize = 32f;
     private enum Orientation { Horizontal, Vertical };
     private Orientation gridOrientation = Orientation.Horizontal;
@@ -73,6 +73,7 @@ public class BarrelControl : MonoBehaviour {
 
     public bool push(int to)
     {
+        
         bool success = false;
 
         if (!lc.prediction(pos.x, pos.y, to))
@@ -80,7 +81,9 @@ public class BarrelControl : MonoBehaviour {
             StartCoroutine(move(transform));
             success = true;
         }
+        Debug.Log("Push " + to + " : " + success);
         return success;
+
     }
 	
 	// Update is called once per frame
