@@ -123,19 +123,26 @@ public class BugControlScript : MonoBehaviour {
 		isMoving = false;
 
 }
-/*	void OnCollisionEnter(Collision c){
-		if(movex!=0) transform.
-		if(movey!=0) 
-	
-	
-	}*/
+	void OnCollisionEnter(Collision c){
+        if (c.gameObject.name == "barrel")
+        {
+            moveBarrel(c);
+        }
+	}
+
+    private void moveBarrel(Collision c)
+    {
+        BarrelControl bc = c.gameObject.GetComponent<BarrelControl>();
+        bool barrelMoved;
+        if (input.x > 0 && input.y == 0) barrelMoved = bc.push(0);
+        if (input.x < 0 && input.y == 0) barrelMoved = bc.push(1);
+        if (input.y > 0 && input.x == 0) barrelMoved = bc.push(2);
+        if (input.y < 0 && input.x == 0) barrelMoved = bc.push(3);
+    }
 
 
 
 	public void setPosition(float x, float y){
 		gameObject.transform.Translate(x,y,0);
-
-
-
 	}
 }

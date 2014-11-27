@@ -71,7 +71,7 @@ public class BarrelControl : MonoBehaviour {
 
 
 
-    bool push(int to)
+    public bool push(int to)
     {
         bool success = false;
 
