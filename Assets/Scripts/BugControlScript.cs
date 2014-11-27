@@ -3,8 +3,8 @@ using System.Collections;
 
 public class BugControlScript : MonoBehaviour {
 	//public float step = 16;
-	private float moveSpeed = 32f;
-	private float gridSize = 1f;
+	private float moveSpeed = 96f;
+	private float gridSize = 32f;
 	private enum Orientation { Horizontal, Vertical};
 	private Orientation gridOrientation = Orientation.Horizontal;
 	private bool allowDiagonals = false;
@@ -51,8 +51,8 @@ public class BugControlScript : MonoBehaviour {
 					input.x=0;				
 				}
 			}
-			if(input!= Vector2.zero){
-				if(!ray)StartCoroutine(move(transform));
+			if((input!= Vector2.zero)&&(!ray)){
+				StartCoroutine(move(transform));
 			}
 		
 
@@ -102,7 +102,7 @@ public class BugControlScript : MonoBehaviour {
 		
 		if(gridOrientation == Orientation.Horizontal) {
 			endPosition = new Vector3(startPosition.x + System.Math.Sign(input.x) * gridSize,
-			                          startPosition.y, startPosition.z + System.Math.Sign(input.y) * gridSize);
+                                      startPosition.y + System.Math.Sign(input.y) * gridSize, startPosition.z);
 		} else {
 			endPosition = new Vector3(startPosition.x + System.Math.Sign(input.x) * gridSize,
 			                          startPosition.y + System.Math.Sign(input.y) * gridSize, startPosition.z);
