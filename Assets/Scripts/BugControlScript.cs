@@ -20,7 +20,7 @@ public class BugControlScript : MonoBehaviour {
 	private float movey=0;*/
 	private Vector3 pos ;
 	private Transform tr;
-	public bool rayState;
+	public int rayState;
 	private Level_Control lc;
 	private string levelName;
 
@@ -37,11 +37,28 @@ public class BugControlScript : MonoBehaviour {
 		if(!isMoving){
 			input = new Vector2(Input.GetAxis("Horizontal"),Input.GetAxis("Vertical"));
 			pos = transform.position;
-			bool ray = false;
-			if(input.x>0&&input.y==0) ray = lc.prediction(pos.x,pos.y,0);
-			if(input.x<0&&input.y==0) ray = lc.prediction(pos.x,pos.y,1);
-			if(input.y>0&&input.x==0) ray = lc.prediction(pos.x,pos.y,2);
-			if(input.y<0&&input.x==0) ray = lc.prediction(pos.x,pos.y,3);
+			int ray = 0;
+            int smer = 0;
+            if (input.x > 0 && input.y == 0)
+            {
+                ray = lc.prediction(pos.x, pos.y, 0);
+                smer = 0;
+            }
+            if (input.x < 0 && input.y == 0)
+            {
+                ray = lc.prediction(pos.x, pos.y, 1);
+                smer = 1;
+            }
+            if (input.y > 0 && input.x == 0) 
+            { 
+                ray = lc.prediction(pos.x, pos.y, 2);
+                smer = 2;
+            }
+            if (input.y < 0 && input.x == 0)
+            {
+                ray = lc.prediction(pos.x, pos.y, 3);
+                smer = 3;
+            }
 			rayState = ray;
 			if(!allowDiagonals){
 
@@ -51,7 +68,7 @@ public class BugControlScript : MonoBehaviour {
 					input.x=0;				
 				}
 			}
-			if((input!= Vector2.zero)&&(!ray)){
+			if((input!= Vector2.zero)&&canMove(pos.x,pos.y,smer)){
 				StartCoroutine(move(transform));
 			}
 		
@@ -94,6 +111,20 @@ public class BugControlScript : MonoBehaviour {
 
 		
 	}*/
+
+    private bool canMove(float x, float y, int smer )
+    {
+        bool ret = true;
+        Vector2 move = lc.getVector(smer);
+        if (lc.prediction(x, y, smer) == 1) ret = false;                    //narazíme na zeď
+        if ((lc.prediction(x, y, smer) == 3) && (lc.prediction(x + 32*move[0], y + 32*move[1], smer) == 1)) ret = false;  //narazíme na sud a ten narazí na zeď
+
+
+
+
+        return ret;
+    }
+
 
 	public IEnumerator move(Transform transform){
 		isMoving = true;
@@ -145,6 +176,7 @@ public class BugControlScript : MonoBehaviour {
             StopCoroutine(move(transform));
         }
     }
+
 
 
 

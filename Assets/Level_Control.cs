@@ -8,6 +8,7 @@ public class Level_Control : MonoBehaviour {
 	private int roomSizeY = 24;
 	private int[,] herniPole;
 	private const int cihla = 1;        //cihla má v tiledové mapě ID 1
+    private const int barel = 3;        //barel má v mapě ID 3
 
 //~~~~~~~~~~~~~ Parser ~~~~~~~~~~~~~
 	int[] parser(string vstup){
@@ -83,41 +84,74 @@ public class Level_Control : MonoBehaviour {
     }
 
 //~~~~~~~~~~~~~ Metody rozhraní ~~~~~~~~~~~~~
-	public bool prediction(float x,float y,int smer){
-		bool col = false;
-		int[] coords = floatToCoords(x,y);
-		switch(smer){
-		case 0:
-			//pravá
 
-			if(herniPole[coords[1], coords[0]+1]==cihla) col = true;
-			break;
-		case 1:
-			//levá
-			if(herniPole[coords[1], coords[0]-1]==cihla) col = true;
-			break;
-		case 2:
-			//dolu
-			if(herniPole[coords[1]-1, coords[0]]==cihla) col = true;
-			break;
-		case 3:
-			//nahoru
-			if(herniPole[coords[1]+1, coords[0]]==cihla) col = true;
+    //public bool prediction(float x, float y, int smer)
+    //{
+    //    bool col = false;
+    //    int[] coords = floatToCoords(x, y);
+    //    switch (smer)
+    //    {
+    //        case 0:
 
-			break;
-		}
-        Debug.Log("ray z "+coords[0]+" "+coords[1]+" ve smeru "+smer+" : "+col);
-		return col;
-	}
+
+    //            if (herniPole[coords[1], coords[0] + 1] == cihla) col = true;
+    //            break;
+    //        case 1:
+
+    //            if (herniPole[coords[1], coords[0] - 1] == cihla) col = true;
+    //            break;
+    //        case 2:
+
+    //            if (herniPole[coords[1] - 1, coords[0]] == cihla) col = true;
+    //            break;
+    //        case 3:
+
+    //            if (herniPole[coords[1] + 1, coords[0]] == cihla) col = true;
+
+    //            break;
+    //    }
+    //    Debug.Log("ray z " + coords[0] + " " + coords[1] + " ve smeru " + smer + " : " + col);
+    //    return col;
+    //}
+
+
+    public int prediction(float x, float y, int smer)
+    {
+        int col = 0;
+        int[] coords = floatToCoords(x, y);
+        switch (smer)
+        {
+            case 0:
+                //pravá
+
+                return herniPole[coords[1], coords[0] + 1];
+                break;
+            case 1:
+                //levá
+                return herniPole[coords[1], coords[0] - 1];
+                break;
+            case 2:
+                //dolu
+                return herniPole[coords[1] - 1, coords[0]];
+                break;
+            case 3:
+                //nahoru
+                return herniPole[coords[1] + 1, coords[0]];
+
+                break;
+        }
+        Debug.Log("ray z " + coords[0] + " " + coords[1] + " ve smeru " + smer + " : " + col);
+        return col;
+    }
 
 	public int blockAt(float x,float y){
 		int[] coords = floatToCoords(x,y);
-		return herniPole[coords[1],coords[1]];
+		return herniPole[coords[1],coords[0]];
 	}
 
 	public void setBlockAt(float x,float y,int id){
 		int[] coords = floatToCoords(x,y);
-		herniPole[coords[0],coords[1]]=id;
+		herniPole[coords[1],coords[0]]=id;
 	}
 
 //~~~~~~~~~~~~~ Převod na koordináty ~~~~~~~~~~~~~
@@ -131,8 +165,34 @@ public class Level_Control : MonoBehaviour {
 		Debug.Log(coords[1]);
         */
 		return coords;
-	}
+    }
 
+
+
+    public Vector2 getVector(int direction)
+    {
+        Vector2 ret = new Vector2();
+        switch (direction)
+        {
+            case 0: //right
+                ret[0] = 1;
+                ret[1] = 0;
+                break;
+            case 1: //left
+                ret[0] = -1;
+                ret[1] = 0;
+                break;
+            case 2: //up y+
+                ret[0] = 0;
+                ret[1] = 1;
+                break;
+            case 3: //down y-
+                ret[0] = 0;
+                ret[1] = -1;
+                break;
+        }
+        return ret;
+    }
 
 
 

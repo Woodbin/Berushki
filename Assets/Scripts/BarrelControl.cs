@@ -28,6 +28,7 @@ public class BarrelControl : MonoBehaviour {
         lc = GameObject.Find(levelName).GetComponent<Level_Control>();
         tr = gameObject.transform;
         pos = transform.position;
+        lc.setBlockAt(pos.x, pos.y, 3);
 	}
 
 
@@ -70,31 +71,6 @@ public class BarrelControl : MonoBehaviour {
     }
 
 
-    private Vector2 getVector(int direction)
-    {
-        Vector2 ret = new Vector2();
-        switch (direction)
-        {
-            case 0: //right
-                ret[0] = 1;
-                ret[1] = 0;
-                break;
-            case 1: //left
-                ret[0] = -1;
-                ret[1] = 0;
-                break;
-            case 2: //up y+
-                ret[0] = 0;
-                ret[1] = 1;
-                break;
-            case 3: //down y-
-                ret[0] = 0;
-                ret[1] = -1;
-                break;
-        }
-        return ret;
-    }
-
 
 
     public bool push(int to)
@@ -103,10 +79,12 @@ public class BarrelControl : MonoBehaviour {
         bool success = false;
         pos = transform.position;
 
-        if (!lc.prediction(pos.x, pos.y, to))
+        if (lc.prediction(pos.x, pos.y, to)!=1)
         {
-            input = getVector(to);
+            input = lc.getVector(to);
             StartCoroutine(move(transform));
+            lc.setBlockAt(pos.x, pos.y, 0);
+            lc.setBlockAt(pos.x+32*input[0], pos.y+32*input[1], 3);
             success = true;
         }
         Debug.Log("Push " + to + " : " + success);
