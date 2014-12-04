@@ -135,11 +135,15 @@ public class BugControlScript : MonoBehaviour {
         Debug.Log("collision");
         BarrelControl bc = c.gameObject.GetComponent<BarrelControl>();
         bool barrelMoved=false;
-        if (input.x > 0 && input.y == 0) barrelMoved = bc.push(0);
-        if (input.x < 0 && input.y == 0) barrelMoved = bc.push(1);
-        if (input.y > 0 && input.x == 0) barrelMoved = bc.push(2);
-        if (input.y < 0 && input.x == 0) barrelMoved = bc.push(3);
-        if (!barrelMoved) StopCoroutine(move(transform));
+        if ((input.x > 0 )&& (input.y == 0)) barrelMoved = bc.push(0);
+        if ((input.x < 0 )&& (input.y == 0)) barrelMoved = bc.push(1);
+        if ((input.y > 0 )&& (input.x == 0)) barrelMoved = bc.push(2);
+        if ((input.y < 0 )&& (input.x == 0)) barrelMoved = bc.push(3);
+        if (!barrelMoved)
+        {
+            Debug.Log("Stopping");
+            StopCoroutine(move(transform));
+        }
     }
 
 

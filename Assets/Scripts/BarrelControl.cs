@@ -101,7 +101,7 @@ public class BarrelControl : MonoBehaviour {
     {
         
         bool success = false;
-
+        pos = transform.position;
 
         if (!lc.prediction(pos.x, pos.y, to))
         {
