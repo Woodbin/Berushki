@@ -33,6 +33,7 @@ public class BarrelControl : MonoBehaviour {
 
     public IEnumerator move(Transform transform)
     {
+        
         isMoving = true;
         startPosition = transform.position;
         t = 0;
@@ -69,6 +70,31 @@ public class BarrelControl : MonoBehaviour {
     }
 
 
+    private Vector2 getVector(int direction)
+    {
+        Vector2 ret = new Vector2();
+        switch (direction)
+        {
+            case 0: //right
+                ret[0] = 1;
+                ret[1] = 0;
+                break;
+            case 1: //left
+                ret[0] = -1;
+                ret[1] = 0;
+                break;
+            case 2: //up y+
+                ret[0] = 0;
+                ret[1] = 1;
+                break;
+            case 3: //down y-
+                ret[0] = 0;
+                ret[1] = -1;
+                break;
+        }
+        return ret;
+    }
+
 
 
     public bool push(int to)
@@ -76,8 +102,10 @@ public class BarrelControl : MonoBehaviour {
         
         bool success = false;
 
+
         if (!lc.prediction(pos.x, pos.y, to))
         {
+            input = getVector(to);
             StartCoroutine(move(transform));
             success = true;
         }
