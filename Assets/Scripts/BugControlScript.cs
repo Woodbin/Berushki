@@ -119,8 +119,7 @@ public class BugControlScript : MonoBehaviour {
         Vector2 move = lc.getVector(smer);
         if (lc.prediction(x, y, smer) == 1) ret = false;                    //narazíme na zeď
         if ((lc.prediction(x, y, smer) == 3) && (lc.prediction(x + 32*move[0], y + 32*move[1], smer) !=2)) ret = false;  //narazíme na sud a ten narazí něco co není vzduch
-
-
+       
 
 
         return ret;
@@ -163,6 +162,14 @@ public class BugControlScript : MonoBehaviour {
         if(c.gameObject.name.Equals("pickaxe")){
             pickaxeCount++;
             c.GetComponent<PickaxeControl>().pickUp();
+        }
+        if (c.gameObject.name.Equals("destroyableWall"))
+        {
+            if (pickaxeCount > 0)
+            {
+                c.gameObject.GetComponent<DestroyableWallControl>().tearDown();
+                pickaxeCount--; 
+            }
         }
 	}
 
