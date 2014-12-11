@@ -23,6 +23,7 @@ public class BugControlScript : MonoBehaviour {
 	public int rayState;
 	private Level_Control lc;
 	private string levelName;
+    private int pickaxeCount = 0;
 
 	// Use this for initialization
 	void Start () {
@@ -117,7 +118,7 @@ public class BugControlScript : MonoBehaviour {
         bool ret = true;
         Vector2 move = lc.getVector(smer);
         if (lc.prediction(x, y, smer) == 1) ret = false;                    //narazíme na zeď
-        if ((lc.prediction(x, y, smer) == 3) && (lc.prediction(x + 32*move[0], y + 32*move[1], smer) == 1)) ret = false;  //narazíme na sud a ten narazí na zeď
+        if ((lc.prediction(x, y, smer) == 3) && (lc.prediction(x + 32*move[0], y + 32*move[1], smer) !=2)) ret = false;  //narazíme na sud a ten narazí něco co není vzduch
 
 
 
@@ -155,9 +156,13 @@ public class BugControlScript : MonoBehaviour {
 
 }
 	void OnTriggerEnter2D(Collider2D c){
-        if (c.gameObject.name == "barrel")
+        if (c.gameObject.name.Equals("barrel"))
         {
             moveBarrel(c);
+        }
+        if(c.gameObject.name.Equals("pickaxe")){
+            pickaxeCount++;
+            c.GetComponent<PickaxeControl>().pickUp();
         }
 	}
 

@@ -1,8 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class PickaxeControl
-    : MonoBehaviour {
+public class DestroyableWallControl : MonoBehaviour {
 
     private string levelName;
     private Level_Control lc;
@@ -14,7 +13,7 @@ public class PickaxeControl
         lc = GameObject.Find(levelName).GetComponent<Level_Control>();
         tr = gameObject.transform;
         pos = transform.position;
-        lc.setBlockAt(pos.x, pos.y, 4);
+        lc.setBlockAt(pos.x, pos.y, 5);
 	}
 	
 	// Update is called once per frame
@@ -22,11 +21,9 @@ public class PickaxeControl
 	
 	}
 
-
-    public void pickUp()
+    public void tearDown()
     {
         lc.setBlockAt(pos.x, pos.y, 2);
         Destroy(gameObject);
-
     }
 }
