@@ -26,6 +26,7 @@ public class PickaxeControl
     public void pickUp()
     {
         lc.setBlockAt(pos.x, pos.y, 2);
+		Debug.Log ("pickaxe pridanej");
         Destroy(gameObject);
 
     }
